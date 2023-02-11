@@ -116,7 +116,7 @@ class _NowPlayingState extends State<NowPlaying> {
                           shadowColor: const Color.fromARGB(255, 98, 255, 103),
                           color: const Color.fromARGB(255, 27, 28, 27),
                           child: SizedBox(
-                            height: 310,
+                            height: 250,
                             width: 350,
                             child: ListView(
                               children: [
