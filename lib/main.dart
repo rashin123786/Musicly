@@ -4,6 +4,7 @@ import 'package:musicly/screens/splash_screen.dart';
 import 'package:musicly/widgets/song_model.dart';
 import 'package:provider/provider.dart';
 import 'model/musicly_model.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +15,12 @@ Future<void> main() async {
 
   await Hive.openBox<int>('FavoriteDB');
   await Hive.openBox<MusiclyModel>('playlistDb');
+
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
 
   runApp(ChangeNotifierProvider(
     create: (context) => SongModelProvider(),

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:musicly/screens/lyrics.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import '../controllers/all_songs.dart';
@@ -59,6 +60,15 @@ class _NowPlayingState extends State<NowPlaying> {
   }
 
   void playSong() {
+    AudioSource.uri(
+      Uri.parse('https://example.com/song1.mp3'),
+      tag: MediaItem(
+        id: '${widget.songModelList[currentIndex].id}',
+        album: '${widget.songModelList[currentIndex].album}',
+        title: '${widget.songModelList[currentIndex].displayNameWOExt}',
+        artUri: Uri.parse('https://example.com/albumart.jpg'),
+      ),
+    );
     GetAllSongController.audioPlayer.play();
     GetAllSongController.audioPlayer.durationStream.listen((d) {
       setState(() {
