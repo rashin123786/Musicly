@@ -2,25 +2,20 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:musicly/widgets/bottom_nav.dart';
 
-class ScreenSplash extends StatefulWidget {
+class ScreenSplash extends StatelessWidget {
   const ScreenSplash({super.key});
 
   @override
-  State<ScreenSplash> createState() => _ScreenSplashState();
-}
-
-class _ScreenSplashState extends State<ScreenSplash> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(
-        const Duration(seconds: 3),
-        (() => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: ((context) => const BottomNav())))));
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Timer(
+      const Duration(seconds: 3),
+      (() => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: ((context) => BottomNav()),
+            ),
+          )),
+    );
     return Scaffold(
       body: Container(
         width: double.infinity,

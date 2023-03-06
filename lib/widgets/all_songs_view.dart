@@ -4,16 +4,29 @@ import 'package:musicly/widgets/song_model.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 import '../controllers/all_songs.dart';
-import '../db/favourite_db.dart';
+
+import '../providers/DbProviders/fav_db_controller.dart';
 import '../screens/my_music.dart';
 import 'fav_button.dart';
 
 final OnAudioQuery _audioQuery = OnAudioQuery();
 bool sizedBoxSpacing = false;
 List<SongModel> allSongs = [];
-bool gridopt = false;
 
-class ListShow {
+class AllSongsView with ChangeNotifier {
+  bool gridopt = false;
+  void viewChange() {
+    if (gridopt) {
+      listShow;
+      notifyListeners();
+    } else {
+      gridShow;
+      notifyListeners();
+    }
+    gridopt = !gridopt;
+    notifyListeners();
+  }
+
   FutureBuilder<List<SongModel>> listShow = FutureBuilder<List<SongModel>>(
       future: _audioQuery.querySongs(
           sortType: null,
@@ -34,8 +47,9 @@ class ListShow {
           );
         }
         startSong = items.data!;
-        if (!FavoriteDb.isInitialized) {
-          FavoriteDb.initialize(items.data!);
+        if (!FavouriteDb.isInitialized) {
+          Provider.of<FavouriteDb>(context, listen: false)
+              .initialize(items.data!);
         }
         GetAllSongController.songscopy = items.data!;
 
@@ -90,9 +104,9 @@ class ListShow {
           itemCount: items.data!.length,
         );
       }));
-}
 
-class GridShow {
+  //Grid Show--------------------
+
   FutureBuilder<List<SongModel>> gridShow = FutureBuilder<List<SongModel>>(
     future: _audioQuery.querySongs(
         sortType: null,
@@ -113,8 +127,9 @@ class GridShow {
         );
       }
       startSong = items.data!;
-      if (!FavoriteDb.isInitialized) {
-        FavoriteDb.initialize(items.data!);
+      if (!FavouriteDb.isInitialized) {
+        Provider.of<FavouriteDb>(context, listen: false)
+            .initialize(items.data!);
       }
       GetAllSongController.songscopy = items.data!;
 
@@ -189,3 +204,5 @@ class GridShow {
     }),
   );
 }
+
+class GridShow {}

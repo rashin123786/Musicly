@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import '../db/favourite_db.dart';
+import 'package:provider/provider.dart';
 
-class FavButton extends StatefulWidget {
+import '../providers/DbProviders/fav_db_controller.dart';
+
+class FavButton extends StatelessWidget {
   const FavButton({
     super.key,
     required this.songFavorite,
@@ -10,17 +12,11 @@ class FavButton extends StatefulWidget {
   final SongModel songFavorite;
 
   @override
-  State<FavButton> createState() => _FavButtonState();
-}
-
-class _FavButtonState extends State<FavButton> {
-  @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: FavoriteDb.favoriteSongs,
-      builder: (BuildContext ctx, List<SongModel> favoriteData, Widget? child) {
+    return Consumer<FavouriteDb>(
+      builder: (ctx, favoriteData, child) {
         return InkWell(
-          child: FavoriteDb.isFavor(widget.songFavorite)
+          child: favoriteData.isFavor(songFavorite)
               ? const Icon(
                   Icons.favorite,
                   color: Colors.greenAccent,
@@ -30,8 +26,8 @@ class _FavButtonState extends State<FavButton> {
                   color: Colors.greenAccent,
                 ),
           onTap: () async {
-            if (FavoriteDb.isFavor(widget.songFavorite)) {
-              FavoriteDb.delete(widget.songFavorite.id);
+            if (favoriteData.isFavor(songFavorite)) {
+              favoriteData.delete(songFavorite.id);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   duration: Duration(milliseconds: 350),
@@ -39,7 +35,7 @@ class _FavButtonState extends State<FavButton> {
                 ),
               );
             } else {
-              FavoriteDb.add(widget.songFavorite);
+              favoriteData.add(songFavorite);
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   duration: Duration(milliseconds: 350),
                   content: Text('Added To Favourite')));

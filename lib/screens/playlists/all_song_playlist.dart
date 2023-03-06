@@ -4,7 +4,7 @@ import 'package:musicly/model/musicly_model.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import '../../widgets/styles.dart';
-import '../search.dart';
+import '../../search/search.dart';
 
 class PlayListAdd extends StatefulWidget {
   final MusiclyModel playlist;
@@ -117,10 +117,6 @@ class _PlayListAddState extends State<PlayListAdd> {
                                                           setState(() {
                                                             songAddPlaylist(item
                                                                 .data![index]);
-                                                            PlaylistDb
-                                                                .playlistNotifiier
-                                                                // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
-                                                                .notifyListeners();
                                                           });
                                                         },
                                                         icon: const Icon(
@@ -187,6 +183,5 @@ class _PlayListAddState extends State<PlayListAdd> {
         ));
     ScaffoldMessenger.of(context).showSnackBar(snackBar1);
     // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
-    PlaylistDb.playlistNotifiier.notifyListeners();
   }
 }

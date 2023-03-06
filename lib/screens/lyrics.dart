@@ -17,7 +17,7 @@ class LyricsSong {
       final result = LyricsModel.fromJson(data);
       return result.message!.body!.lyrics!.lyricsBody!;
     } else {
-      return 'wsedrftgyhujxdcftvgbhzsxrdctfvgybh';
+      return '';
     }
   }
 }

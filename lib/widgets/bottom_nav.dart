@@ -1,46 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:musicly/providers/bottom_nav_controller.dart';
 import 'package:musicly/screens/my_music.dart';
 import 'package:musicly/screens/playlists/play_lists_screen.dart';
 import 'package:musicly/screens/settings/settings.dart';
-import 'package:on_audio_query/on_audio_query.dart';
-import '../db/favourite_db.dart';
+import 'package:provider/provider.dart';
+import '../providers/DbProviders/fav_db_controller.dart';
 import '../screens/favourites/favourite_screen.dart';
 
-class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
+class BottomNav extends StatelessWidget {
+  BottomNav({super.key});
 
-  @override
-  State<BottomNav> createState() => _BottomNavState();
-}
+  final int _currentSelectedIndex = 0;
 
-class _BottomNavState extends State<BottomNav> {
-  int _currentSelectedIndex = 0;
-  final pages = const [
-    MyMusic(),
-    FavouriteScreen(),
-    PlayListScreen(),
-    SettingsScreen(),
+  final pages = [
+    const MyMusic(),
+    const FavouriteScreen(),
+    const PlayListScreen(),
+    const SettingsScreen(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ValueListenableBuilder(
-          valueListenable: FavoriteDb.favoriteSongs,
-          builder:
-              (BuildContext context, List<SongModel> music, Widget? child) {
-            return PageView(
-              children: [
-                pages[_currentSelectedIndex],
-              ],
-            );
-          }),
+      body: Consumer2<FavouriteDb, BottomNavControll>(
+          builder: (context, value, value2, child) {
+        return PageView(
+          children: [
+            pages[value2.currentSelectedIndex],
+          ],
+        );
+      }),
       bottomNavigationBar: GNav(
         selectedIndex: _currentSelectedIndex,
         onTabChange: (newIndex) {
-          setState(() {
-            _currentSelectedIndex = newIndex;
-          });
+          Provider.of<BottomNavControll>(context, listen: false)
+              .bottomSwitch(newIndex);
         },
         tabBorderRadius: 30,
         tabActiveBorder: Border.all(color: Colors.green),
