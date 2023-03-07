@@ -6,8 +6,10 @@ import 'package:provider/provider.dart';
 class FavMusicPlayController with ChangeNotifier {
   late final SongModel songFavoriteMusicPlaying;
   void favButtons(context) {
-    if (Provider.of<FavouriteDb>(context).isFavor(songFavoriteMusicPlaying)) {
-      Provider.of<FavouriteDb>(context).delete(songFavoriteMusicPlaying.id);
+    if (Provider.of<FavouriteDb>(context, listen: false)
+        .isFavor(songFavoriteMusicPlaying)) {
+      Provider.of<FavouriteDb>(context, listen: false)
+          .delete(songFavoriteMusicPlaying.id);
       const Icon(
         Icons.favorite_outline,
         color: Colors.greenAccent,
@@ -20,19 +22,18 @@ class FavMusicPlayController with ChangeNotifier {
         ),
       );
     } else {
-      Provider.of<FavouriteDb>(context).add(songFavoriteMusicPlaying);
+      Provider.of<FavouriteDb>(context, listen: false)
+          .add(songFavoriteMusicPlaying);
       const Icon(
         Icons.favorite,
         color: Colors.greenAccent,
       );
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            duration: Duration(milliseconds: 350),
-            content: Text('Added To Favourite'),
-          ),
-        );
-      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(milliseconds: 350),
+          content: Text('Added To Favourite'),
+        ),
+      );
     }
     notifyListeners();
   }

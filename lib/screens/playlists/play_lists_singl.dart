@@ -20,40 +20,45 @@ class PlayListSingle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<SongModel> songPlaylist = [];
-    return Consumer<PlayListDb>(
-      builder: (context, value, _) {
-        return Scaffold(
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-          body: SafeArea(
-            child: Column(
+    late List<SongModel> songPlaylist = [];
+
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.greenAccent,
-                        size: 30,
-                      ),
-                    ),
-                    Text(playlist.name, style: AppStyles().myMusicStyleHead),
-                    const SizedBox(
-                      width: 50,
-                    )
-                  ],
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.greenAccent,
+                    size: 30,
+                  ),
                 ),
+                Text(playlist.name, style: AppStyles().myMusicStyleHead),
                 const SizedBox(
-                  height: 10,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
+                  width: 50,
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ValueListenableBuilder(
+                  valueListenable:
+                      Hive.box<MusiclyModel>('playlistDb').listenable(),
+                  builder: (context, music, child) {
+                    songPlaylist =
+                        listPlaylist(music.values.toList()[findex].songId);
+                    return SizedBox(
                       height: 400,
                       width: double.infinity,
                       child: songPlaylist.isEmpty
@@ -133,26 +138,26 @@ class PlayListSingle extends StatelessWidget {
                               }),
                               itemCount: songPlaylist.length,
                             ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return PlayListAdd(
-                    playlist: playlist,
-                  );
-                },
-              ));
+                    );
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return PlayListAdd(
+                playlist: playlist,
+              );
             },
-            child: const Icon(Icons.add),
-          ),
-        );
-      },
+          ));
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 

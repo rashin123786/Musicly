@@ -14,7 +14,7 @@ class BottomNav extends StatelessWidget {
   final int _currentSelectedIndex = 0;
 
   final pages = [
-    const MyMusic(),
+    MyMusic(),
     const FavouriteScreen(),
     const PlayListScreen(),
     const SettingsScreen(),

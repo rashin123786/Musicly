@@ -5,10 +5,6 @@ import '../controllers/all_songs.dart';
 
 class MyMusicController with ChangeNotifier {
   bool sizedBoxSpacing = false;
-  Future<void> reqeustStoragePermission() async {
-    Permission.storage.request();
-    notifyListeners();
-  }
 
   void onInit() {
     GetAllSongController.audioPlayer.currentIndexStream.listen((index) {

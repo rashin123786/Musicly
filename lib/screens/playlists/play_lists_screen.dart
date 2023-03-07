@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:musicly/screens/playlists/play_lists_singl.dart';
 import 'package:provider/provider.dart';
-import '../../db/play_list_db.dart';
+
 import '../../model/musicly_model.dart';
 import '../../providers/DbProviders/playlist_controller.dart';
 import '../../widgets/styles.dart';
@@ -75,20 +75,21 @@ class PlayListScreen extends StatelessWidget {
                                     style: AppStyles().myMusicStyleHead,
                                   ),
                                   trailing: PopupMenuButton(
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.more_vert,
                                       color: Colors.green,
                                     ),
-                                    color: Color.fromARGB(255, 54, 54, 54),
+                                    color:
+                                        const Color.fromARGB(255, 54, 54, 54),
                                     itemBuilder: (context) => [
-                                      PopupMenuItem(
+                                      const PopupMenuItem(
                                         value: 1,
                                         child: Text(
                                           'Edit',
                                           style: TextStyle(color: Colors.green),
                                         ),
                                       ),
-                                      PopupMenuItem(
+                                      const PopupMenuItem(
                                         value: 2,
                                         child: Text(
                                           'Delete',
@@ -294,9 +295,6 @@ Future<void> saveButtonPressed(context) async {
   }
 }
 
-// final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-// TextEditingController nameController = TextEditingController();
-
 Future<dynamic> editPlaylistName(
     BuildContext context, MusiclyModel data, int index) {
   nameController = TextEditingController(text: data.name);
@@ -305,12 +303,12 @@ Future<dynamic> editPlaylistName(
     builder: (ctx) => SimpleDialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
-      backgroundColor: Color.fromARGB(255, 39, 39, 39),
+      backgroundColor: const Color.fromARGB(255, 39, 39, 39),
       children: [
-        SimpleDialogOption(
+        const SimpleDialogOption(
           child: Text(
             "Edit Playlist ",
-            style: const TextStyle(
+            style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 18,
                 fontWeight: FontWeight.w600),

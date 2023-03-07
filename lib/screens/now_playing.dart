@@ -5,8 +5,8 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:musicly/screens/lyrics.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import '../controllers/all_songs.dart';
+import '../widgets/fav_button.dart';
 import '../widgets/styles.dart';
-import 'favourites/favourite_music.dart';
 
 // ignore: must_be_immutable
 class NowPlaying extends StatefulWidget {
@@ -65,7 +65,7 @@ class _NowPlayingState extends State<NowPlaying> {
       tag: MediaItem(
         id: '${widget.songModelList[currentIndex].id}',
         album: '${widget.songModelList[currentIndex].album}',
-        title: '${widget.songModelList[currentIndex].displayNameWOExt}',
+        title: widget.songModelList[currentIndex].displayNameWOExt,
         artUri: Uri.parse('https://example.com/albumart.jpg'),
       ),
     );
@@ -211,9 +211,14 @@ class _NowPlayingState extends State<NowPlaying> {
                     const SizedBox(
                       width: 10,
                     ),
-                    FavMusicPlay(
-                        songFavoriteMusicPlaying:
-                            widget.songModelList[currentIndex]),
+
+                    //  Provider.of<FavMusicPlayController>(context).favButtons(widget.songModelList[currentIndex]),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: FavButton(
+                        songFavorite: widget.songModelList[currentIndex],
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(

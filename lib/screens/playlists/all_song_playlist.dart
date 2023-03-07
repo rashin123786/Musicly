@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:musicly/db/play_list_db.dart';
+
 import 'package:musicly/model/musicly_model.dart';
+import 'package:musicly/providers/DbProviders/playlist_controller.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/styles.dart';
 import '../../search/search.dart';
 
-class PlayListAdd extends StatefulWidget {
+class PlayListAdd extends StatelessWidget {
   final MusiclyModel playlist;
   const PlayListAdd({super.key, required this.playlist});
 
-  @override
-  State<PlayListAdd> createState() => _PlayListAddState();
-}
-
-class _PlayListAddState extends State<PlayListAdd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,88 +75,101 @@ class _PlayListAddState extends State<PlayListAdd> {
                                 return ListView.builder(
                                   itemBuilder: ((context, index) {
                                     return Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 6, right: 6),
-                                      child: Card(
-                                        elevation: 5,
-                                        shadowColor: const Color.fromARGB(
-                                            255, 98, 255, 103),
-                                        color: const Color.fromARGB(
-                                            255, 27, 28, 27),
-                                        child: ListTile(
-                                            leading: QueryArtworkWidget(
-                                              id: item.data![index].id,
-                                              type: ArtworkType.AUDIO,
-                                            ),
-                                            title: Text(
-                                              item.data![index]
-                                                  .displayNameWOExt,
-                                              style: const TextStyle(
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  color: Colors.white),
-                                            ),
-                                            subtitle: Text(
-                                              '${item.data![index].artist == "<unknown>" ? "Unknown Artist" : item.data![index].artist}',
-                                              maxLines: 1,
-                                              style: const TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.blueGrey),
-                                            ),
-                                            trailing: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10),
-                                              child: Wrap(children: [
-                                                !widget.playlist.isValueIn(
-                                                        item.data![index].id)
-                                                    ? IconButton(
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            songAddPlaylist(item
-                                                                .data![index]);
-                                                          });
-                                                        },
-                                                        icon: const Icon(
-                                                          Icons.add,
-                                                          color: Colors.green,
-                                                        ))
-                                                    : IconButton(
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            widget.playlist
-                                                                .deleteData(item
-                                                                    .data![
-                                                                        index]
-                                                                    .id);
-                                                          });
-                                                          const snackBar =
-                                                              SnackBar(
-                                                            content: Text(
-                                                              'Song deleted from playlist',
-                                                            ),
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    350),
-                                                          );
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                                  snackBar);
-                                                        },
-                                                        icon: const Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  bottom: 25),
-                                                          child: Icon(
-                                                            Icons.minimize,
-                                                            color: Colors
-                                                                .greenAccent,
-                                                          ),
-                                                        ))
-                                              ]),
-                                            )),
-                                      ),
-                                    );
+                                        padding: const EdgeInsets.only(
+                                            left: 6, right: 6),
+                                        child: Card(
+                                            elevation: 5,
+                                            shadowColor: const Color.fromARGB(
+                                                255, 98, 255, 103),
+                                            color: const Color.fromARGB(
+                                                255, 27, 28, 27),
+                                            child: ListTile(
+                                              leading: QueryArtworkWidget(
+                                                id: item.data![index].id,
+                                                type: ArtworkType.AUDIO,
+                                              ),
+                                              title: Text(
+                                                item.data![index]
+                                                    .displayNameWOExt,
+                                                style: const TextStyle(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    color: Colors.white),
+                                              ),
+                                              subtitle: Text(
+                                                '${item.data![index].artist == "<unknown>" ? "Unknown Artist" : item.data![index].artist}',
+                                                maxLines: 1,
+                                                style: const TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.blueGrey),
+                                              ),
+                                              trailing: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 10),
+                                                  child: Consumer<PlayListDb>(
+                                                    builder: (context, value,
+                                                        child) {
+                                                      return Wrap(children: [
+                                                        !playlist.isValueIn(item
+                                                                .data![index]
+                                                                .id)
+                                                            ? IconButton(
+                                                                onPressed: () {
+                                                                  songAddPlaylist(
+                                                                      item.data![
+                                                                          index],
+                                                                      context);
+                                                                  value
+                                                                      .notifyListeners();
+                                                                },
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons.add,
+                                                                  color: Colors
+                                                                      .green,
+                                                                ))
+                                                            : IconButton(
+                                                                onPressed: () {
+                                                                  playlist.deleteData(item
+                                                                      .data![
+                                                                          index]
+                                                                      .id);
+                                                                  value
+                                                                      .notifyListeners();
+
+                                                                  const snackBar =
+                                                                      SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      'Song deleted from playlist',
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            350),
+                                                                  );
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                          snackBar);
+                                                                },
+                                                                icon:
+                                                                    const Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              25),
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .minimize,
+                                                                    color: Colors
+                                                                        .greenAccent,
+                                                                  ),
+                                                                ))
+                                                      ]);
+                                                    },
+                                                  )),
+                                            )));
                                   }),
                                   itemCount: item.data!.length,
                                 );
@@ -173,8 +183,8 @@ class _PlayListAddState extends State<PlayListAdd> {
         ));
   }
 
-  void songAddPlaylist(SongModel data) {
-    widget.playlist.add(data.id);
+  void songAddPlaylist(SongModel data, context) {
+    playlist.add(data.id);
 
     const snackBar1 = SnackBar(
         duration: Duration(milliseconds: 300),
@@ -182,6 +192,5 @@ class _PlayListAddState extends State<PlayListAdd> {
           'Song added to Playlist',
         ));
     ScaffoldMessenger.of(context).showSnackBar(snackBar1);
-    // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
   }
 }

@@ -12,6 +12,7 @@ import 'package:just_audio_background/just_audio_background.dart';
 
 import 'providers/bottom_nav_controller.dart';
 import 'providers/my_music_controller.dart';
+
 import 'widgets/all_songs_view.dart';
 
 Future<void> main() async {
@@ -20,10 +21,8 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(MusiclyModelAdapter().typeId)) {
     Hive.registerAdapter(MusiclyModelAdapter());
   }
-
   await Hive.openBox<int>('FavoriteDB');
   await Hive.openBox<MusiclyModel>('playlistDb');
-
   await JustAudioBackground.init(
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
     androidNotificationChannelName: 'Audio playback',
@@ -43,27 +42,27 @@ class Musicly extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ListenableProvider(
+        ChangeNotifierProvider(
           create: (context) => SearchController(),
         ),
-        ListenableProvider(
+        ChangeNotifierProvider(
           create: (context) => FavouriteDb(),
         ),
-        ListenableProvider(
+        ChangeNotifierProvider(
           create: (context) => BottomNavControll(),
         ),
-        ListenableProvider(
+        ChangeNotifierProvider(
           create: (context) => AllSongsView(),
         ),
-        ListenableProvider(
+        ChangeNotifierProvider(
           create: (context) => MyMusicController(),
         ),
-        ListenableProvider(
+        ChangeNotifierProvider(
           create: (context) => FavMusicPlayController(),
         ),
-        ListenableProvider(
+        ChangeNotifierProvider(
           create: (context) => PlayListDb(),
-        )
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
