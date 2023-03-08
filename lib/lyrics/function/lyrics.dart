@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../../api_key.dart';
+import '../../api/api_key.dart';
 import '../lyrics_model.dart';
 
 String isfound = '';
