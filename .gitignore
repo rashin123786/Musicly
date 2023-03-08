@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/release
 
 #ignore files (apiKey)
-lib\api_key.dart
+lib\apiKey
