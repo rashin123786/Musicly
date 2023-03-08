@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:musicly/controllers/all_songs.dart';
-import 'package:musicly/screens/now_playing.dart';
-import 'package:musicly/providers/search_controller.dart';
+import 'package:musicly/controllers/providers/all_songs.dart';
+import 'package:musicly/screens/Nowplay/now_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import '../widgets/fav_button.dart';
-import '../screens/my_music.dart';
-import '../widgets/song_model.dart';
+import '../../controllers/providers/search_controller.dart';
+import '../../widgets/fav_button.dart';
+import '../MyMusic/my_music.dart';
+import '../../widgets/song_model.dart';
 
 class SearchSongs extends StatelessWidget {
   const SearchSongs({super.key});

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:musicly/providers/DbProviders/fav_db_controller.dart';
+import 'package:musicly/controllers/DbProviders/fav_db_controller.dart';
 
-import 'package:musicly/screens/now_playing.dart';
+import 'package:musicly/screens/Nowplay/now_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 
-import '../../controllers/all_songs.dart';
+import '../../controllers/providers/all_songs.dart';
 
 import '../../widgets/styles.dart';
 

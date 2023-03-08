@@ -1,27 +1,21 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:musicly/search/search.dart';
+
+import 'package:musicly/screens/search/search.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import '../controllers/all_songs.dart';
-import '../providers/my_music_controller.dart';
-import '../widgets/all_songs_view.dart';
-import '../widgets/styles.dart';
+
+import '../../widgets/all_songs_view.dart';
+import '../../widgets/styles.dart';
 
 List<SongModel> startSong = [];
 
 class MyMusic extends StatelessWidget {
-  MyMusic({super.key});
-
-  final OnAudioQuery _audioQuery = OnAudioQuery();
-
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  const MyMusic({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_element
     Future<void> reqeustStoragePermission() async {
       Permission.storage.request();
     }

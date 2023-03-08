@@ -1,8 +1,10 @@
-import 'package:musicly/providers/DbProviders/fav_db_controller.dart';
-import 'package:musicly/providers/fav_music_play_controller.dart';
+import 'package:musicly/controllers/DbProviders/fav_db_controller.dart';
+
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../controllers/providers/fav_music_play_controller.dart';
 
 class FavMusicPlay extends StatelessWidget {
   const FavMusicPlay({super.key, required this.songFavoriteMusicPlaying});

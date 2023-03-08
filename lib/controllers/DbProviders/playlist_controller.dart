@@ -31,9 +31,9 @@ class PlayListDb with ChangeNotifier {
   }
 
   Future<void> editPlaylist(int index, MusiclyModel value) async {
-    final PlaylistDb = Hive.box<MusiclyModel>('playlistDb');
+    final playlistDb = Hive.box<MusiclyModel>('playlistDb');
     await playlistDb.putAt(index, value);
-
+    getAllPlaylist();
     notifyListeners();
   }
 }

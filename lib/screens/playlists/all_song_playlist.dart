@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:musicly/model/musicly_model.dart';
-import 'package:musicly/providers/DbProviders/playlist_controller.dart';
+import 'package:musicly/controllers/DbProviders/playlist_controller.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/styles.dart';
-import '../../search/search.dart';
+import '../search/search.dart';
 
 class PlayListAdd extends StatelessWidget {
   final MusiclyModel playlist;

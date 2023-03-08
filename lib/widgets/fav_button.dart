@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/DbProviders/fav_db_controller.dart';
+import '../controllers/DbProviders/fav_db_controller.dart';
 
 class FavButton extends StatelessWidget {
   const FavButton({

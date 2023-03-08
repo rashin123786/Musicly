@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:musicly/providers/DbProviders/fav_db_controller.dart';
-import 'package:musicly/providers/DbProviders/playlist_controller.dart';
-import 'package:musicly/providers/fav_music_play_controller.dart';
-import 'package:musicly/screens/splash_screen.dart';
-import 'package:musicly/providers/search_controller.dart';
+import 'package:musicly/controllers/DbProviders/fav_db_controller.dart';
+import 'package:musicly/controllers/DbProviders/playlist_controller.dart';
+import 'package:musicly/controllers/providers/my_music_controller.dart';
+
+import 'package:musicly/screens/splashScreen/splash_screen.dart';
+
 import 'package:musicly/widgets/song_model.dart';
 import 'package:provider/provider.dart';
+import 'controllers/providers/bottom_nav_controller.dart';
+import 'controllers/providers/fav_music_play_controller.dart';
+import 'controllers/providers/search_controller.dart';
 import 'model/musicly_model.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-
-import 'providers/bottom_nav_controller.dart';
-import 'providers/my_music_controller.dart';
 
 import 'widgets/all_songs_view.dart';
 

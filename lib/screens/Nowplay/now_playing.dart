@@ -2,11 +2,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-import 'package:musicly/screens/lyrics.dart';
+import 'package:musicly/lyrics_model/function/lyrics.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import '../controllers/all_songs.dart';
-import '../widgets/fav_button.dart';
-import '../widgets/styles.dart';
+import '../../controllers/providers/all_songs.dart';
+import '../../widgets/fav_button.dart';
+import '../../widgets/styles.dart';
 
 // ignore: must_be_immutable
 class NowPlaying extends StatefulWidget {

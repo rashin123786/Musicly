@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musicly/providers/DbProviders/fav_db_controller.dart';
+import 'package:musicly/controllers/DbProviders/fav_db_controller.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 

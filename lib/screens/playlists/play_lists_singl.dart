@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import 'package:musicly/model/musicly_model.dart';
-import 'package:musicly/screens/now_playing.dart';
+import 'package:musicly/screens/Nowplay/now_playing.dart';
 
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import '../../controllers/all_songs.dart';
-import '../../providers/DbProviders/playlist_controller.dart';
+import '../../controllers/providers/all_songs.dart';
+import '../../controllers/DbProviders/playlist_controller.dart';
 import '../../widgets/song_model.dart';
 import '../../widgets/styles.dart';
 import 'all_song_playlist.dart';
