@@ -12,20 +12,9 @@ final OnAudioQuery _audioQuery = OnAudioQuery();
 bool sizedBoxSpacing = false;
 List<SongModel> allSongs = [];
 
-class AllSongsView with ChangeNotifier {
-  bool gridopt = false;
-  void viewChange() {
-    if (gridopt) {
-      listShow;
-      notifyListeners();
-    } else {
-      gridShow;
-      notifyListeners();
-    }
-    gridopt = !gridopt;
-    notifyListeners();
-  }
+bool gridopt = false;
 
+class ViewType {
   FutureBuilder<List<SongModel>> listShow = FutureBuilder<List<SongModel>>(
     future: _audioQuery.querySongs(
         sortType: null,
@@ -106,7 +95,7 @@ class AllSongsView with ChangeNotifier {
     }),
   );
 
-  //Grid Show--------------------
+//Grid Show--------------------
 
   FutureBuilder<List<SongModel>> gridShow = FutureBuilder<List<SongModel>>(
     future: _audioQuery.querySongs(

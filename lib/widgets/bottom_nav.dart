@@ -4,9 +4,11 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:musicly/screens/MyMusic/my_music.dart';
 import 'package:musicly/screens/playlists/play_lists_screen.dart';
 import 'package:musicly/screens/settings/settings.dart';
+
 import 'package:provider/provider.dart';
 import '../controllers/DbProviders/fav_db_controller.dart';
 import '../controllers/providers/bottom_nav_controller.dart';
+
 import '../screens/favourites/favourite_screen.dart';
 
 class BottomNav extends StatelessWidget {

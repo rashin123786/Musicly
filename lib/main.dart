@@ -14,8 +14,6 @@ import 'controllers/providers/search_controller.dart';
 import 'model/musicly_model.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
-import 'widgets/all_songs_view.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -51,9 +49,6 @@ class Musicly extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => BottomNavControll(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => AllSongsView(),
         ),
         ChangeNotifierProvider(
           create: (context) => MyMusicController(),

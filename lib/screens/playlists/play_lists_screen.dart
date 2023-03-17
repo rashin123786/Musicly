@@ -74,38 +74,6 @@ class PlayListScreen extends StatelessWidget {
                                     data.name,
                                     style: AppStyles().myMusicStyleHead,
                                   ),
-                                  // trailing: PopupMenuButton(
-                                  //   icon: const Icon(
-                                  //     Icons.more_vert,
-                                  //     color: Colors.green,
-                                  //   ),
-                                  //   color:
-                                  //       const Color.fromARGB(255, 54, 54, 54),
-                                  //   itemBuilder: (context) => [
-                                  //     const PopupMenuItem(
-                                  //       value: 1,
-                                  //       child: Text(
-                                  //         'Edit',
-                                  //         style: TextStyle(color: Colors.green),
-                                  //       ),
-                                  //     ),
-                                  //     const PopupMenuItem(
-                                  //       value: 2,
-                                  //       child: Text(
-                                  //         'Delete',
-                                  //         style: TextStyle(color: Colors.green),
-                                  //       ),
-                                  //     )
-                                  //   ],
-                                  //   onSelected: (value) {
-                                  //     if (value == 1) {
-                                  //       editPlaylistName(context, data, index);
-                                  //     } else if (value == 2) {
-                                  //       deletePlayList(
-                                  //           context, musicList, index);
-                                  //     }
-                                  //   },
-                                  // ),
                                   trailing: IconButton(
                                       onPressed: (() {
                                         deletePlayList(
